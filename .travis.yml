@@ -1,0 +1,22 @@
+# 관리자 권한 갖기
+sudo: required
+
+# 언어(플랫폼) 선택
+language: generic
+
+services:
+  - docker
+
+# 스크립트를 실행하기 전 할 일(이미지 생성)
+before_install:
+  - echo "start creating an image with dockerfile"
+  - docker build -t pps8853/docker-react-app -f Dockerfile.dev .
+
+# 실행시킬 스크립트
+# -e CI=true 는 travis CI를 위한 설정(없으면 에러)
+script:
+  - docker run -e CI=true pps8853/docker-react-app npm run test -- -- coverage
+
+# 테스트 성공 후 할 일
+after_success:
+  - echo "Test Success";
