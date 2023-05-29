@@ -1,0 +1,20 @@
+version: "3"
+services:
+  react: # 컨테이너 지정
+    build:
+      context: . # 현재 도커파일 위치
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - /usr/src/app/node_modules
+      - ./:/usr/src/app
+    stdin_open: true
+  tests:
+    build:
+      context: . # 현재 도커파일 위치
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /usr/src/app/node_modules
+      - ./:/usr/src/app
+    command: ["npm", "run", "test"]
