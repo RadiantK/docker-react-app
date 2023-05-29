@@ -9,7 +9,7 @@ services:
 
 # 스크립트를 실행하기 전 할 일(이미지 생성)
 before_install:
-  - echo "start creating an image with dockerfile"
+  - echo "start creating an image with Dockerfile"
   - docker build -t pps8853/docker-react-app -f Dockerfile.dev .
 
 # 실행시킬 스크립트
